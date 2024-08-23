@@ -7,23 +7,29 @@ import java.util.Map;
 
 public class ProtocolMapper {
     private final Map<String, String> protocolMap = new HashMap<>();
+    private final FileParser fileParser;
 
-    public ProtocolMapper(String protocolFilePath) {
+    public ProtocolMapper(FileParser fileParser, String protocolFilePath) {
+        this.fileParser = fileParser;
         try {
             loadProtocolMap(protocolFilePath);
         } catch (IOException e) {
             System.err.println("Error loading protocol map from file: " + protocolFilePath + "\n" + e.getMessage());
+            throw new RuntimeException("Failed to load protocol map", e); // Re-throw as runtime exception
         }
     }
 
     private void loadProtocolMap(String protocolFilePath) throws IOException {
-        CSVParser csvParser = new CSVParser();
-        List<String[]> records = csvParser.parseCsvFile(protocolFilePath);
+        List<String[]> records = fileParser.parseFile(protocolFilePath);
         for (String[] record : records) {
+            if (record.length < 2) {
+                System.err.println("Malformed protocol mapping entry: " + String.join(",", record));
+                continue; // Skip malformed records
+            }
             try {
-                protocolMap.put(record[0], record[1].toLowerCase());
+                protocolMap.put(record[0].toLowerCase(), record[1].toLowerCase());
             } catch (Exception e) {
-                System.err.println("Error processing protocol mapping entry: " + String.join(",", record) +"\n" +e.getMessage());
+                System.err.println("Error processing protocol mapping entry: " + String.join(",", record) + "\n" + e.getMessage());
             }
         }
     }

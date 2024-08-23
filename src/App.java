@@ -9,7 +9,7 @@ public class App {
         Properties props = new Properties();
         try {
             // Load the properties file
-            props.load(new FileInputStream("C:\\Users\\shash\\Documents\\Learning\\Spring\\Illumio-tag-network-logs\\src\\config\\config.properties"));
+            props.load(new FileInputStream("..\\Illumio-tag-network-logs\\src\\config\\config.properties"));
 
             // Retrieve file paths from properties
             String flowLogFile = props.getProperty("flowLogFile");
@@ -19,9 +19,9 @@ public class App {
             String portProtocolTagCountOutputFile = props.getProperty("portProtocolTagCountOutputFile");
 
             // Initialize your objects and process the logs
-            ProtocolMapper protocolMapper = new ProtocolMapper(protocolFile);
-            FlowLogProcessor flowLogProcessor = new FlowLogProcessor(new DefaultTaggingStrategy(lookUpFile, protocolMapper));
-            flowLogProcessor.processFlowLogs(flowLogFile);
+            ProtocolMapper protocolMapper = new ProtocolMapper(new CSVParser(),protocolFile);
+            FlowLogProcessor flowLogProcessor = new FlowLogProcessor(new DefaultTaggingStrategy(new CSVParser(), protocolMapper, lookUpFile));
+            flowLogProcessor.processFlowLogs(flowLogFile, new FlowLogParser());
             flowLogProcessor.writeTagCountsToFile(tagCountOutputFile);
             flowLogProcessor.writePortProtocolCountsToFile(portProtocolTagCountOutputFile);
 

@@ -6,22 +6,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CSVParser {
+public class CSVParser implements FileParser {
 
-    // Default delimiter value
-    private static final String DEFAULT_DELIMITER = ",";
-
-    // Method with specified delimiter
-    public List<String[]> parseCsvFile(String filePath, String delimiter) {
+    @Override
+    public List<String[]> parseFile(String filePath){
         List<String[]> records = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
                 try {
                     if (line.trim().isEmpty()) {
-                        continue; // Skipping the empty lines
+                        continue; // Skip empty lines
                     }
-                    String[] values = line.split(delimiter);
+                    // Assuming the default CSV structure is comma-separated
+                    String[] values = line.split(","); // Use comma as default separator for CSV
                     records.add(values);
                 } catch (Exception e) {
                     System.err.println("Error processing line: " + line + "\n" + e.getMessage());
@@ -31,9 +29,5 @@ public class CSVParser {
             System.err.println("Error reading file: " + filePath + "\n" + e.getMessage());
         }
         return records;
-    }
-
-    public List<String[]> parseCsvFile(String filePath) {
-        return parseCsvFile(filePath, DEFAULT_DELIMITER);
     }
 }

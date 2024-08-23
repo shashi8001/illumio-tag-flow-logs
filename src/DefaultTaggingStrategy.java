@@ -8,10 +8,12 @@ import java.util.Map;
 public class DefaultTaggingStrategy implements TaggingStrategy {
     private final Map<String, String> lookupTable;
     private final ProtocolMapper protocolMapper;
+    private final FileParser fileParser;
 
-    public DefaultTaggingStrategy(String lookupFilePath, ProtocolMapper protocolMapper) {
+    public DefaultTaggingStrategy(FileParser fileParser, ProtocolMapper protocolMapper, String lookupFilePath) {
         this.lookupTable = new HashMap<>();
         this.protocolMapper = protocolMapper;
+        this.fileParser = fileParser;
         try {
             loadLookupTable(lookupFilePath);
         } catch (IOException e) {
@@ -20,9 +22,7 @@ public class DefaultTaggingStrategy implements TaggingStrategy {
     }
 
     private void loadLookupTable(String lookupFilePath) throws IOException {
-        CSVParser csvParser = new CSVParser();
-        String delimiter = ",";
-        List<String[]> records = csvParser.parseCsvFile(lookupFilePath, delimiter);
+        List<String[]> records = fileParser.parseFile(lookupFilePath);
         for (String[] record : records) {
             try {
                 if (record.length < 3) {

@@ -16,11 +16,9 @@ public class FlowLogProcessor {
         this.taggingStrategy = taggingStrategy;
     }
 
-    public void processFlowLogs(String flowLogFile) {
-        CSVParser csvParser = new CSVParser();
-        String delimiter = " ";
-
-        List<String[]> flowLogs = csvParser.parseCsvFile(flowLogFile, delimiter);
+    public void processFlowLogs(String flowLogFile, FileParser flowLogParser) throws IOException {
+        // Use the provided FlowLogParser to parse the flow log file
+        List<String[]> flowLogs = flowLogParser.parseFile(flowLogFile);
 
         for (String[] log : flowLogs) {
             try {
@@ -28,7 +26,7 @@ public class FlowLogProcessor {
                     throw new IOException("Malformed log entry or Not a Default log format: " + String.join(" ", log));
                 }
 
-                int dstPort = Integer.parseInt(log[6]);
+                int dstPort = Integer.parseInt(log[5]);
                 String protocol = log[7];
 
                 String tag = taggingStrategy.getTag(dstPort, protocol);
@@ -36,8 +34,7 @@ public class FlowLogProcessor {
                 tagCounts.put(tag, tagCounts.getOrDefault(tag, 0) + 1);
                 portProtocolCounts.put(dstPort + "," + protocol, portProtocolCounts.getOrDefault(dstPort + "," + protocol, 0) + 1);
 
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.err.println("Error processing log entry: " + String.join(" ", log) + "\n" + e.getMessage());
             }
         }
