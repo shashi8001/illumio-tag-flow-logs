@@ -13,14 +13,15 @@ This program is designed to parse a flow log file and map each entry to one or m
   - The lookup table is expected to have three columns: `dstport`, `protocol`, and `tag`.
   - The protocol number mapping file should map protocol names to their respective numbers.
 - **Case Insensitivity**: The program is case-insensitive for protocol names and tags.
-- **File Locations**: The program assumes that the necessary files (flow log, lookup table, protocol mapping) are located within the project directory under the `input/` folder. The output files will be generated in the `output/` folder.
+- **File Locations**: The program assumes that the necessary files (flow log, lookup table, protocol mapping) are located in the project directory under the `input/` folder. The output files will be generated in the `output/` folder.
 - **Port and Protocol Combinations**: The program uses both destination port and protocol to determine the tags, as per the lookup table.
 - **Multiple Tags**: The program supports multiple tags for a single port/protocol combination. If multiple tags are found, all tags will be counted.
+- **Simpler Implementation**
 
 
 ## Instructions to Compile and Run
 
-Best way to run the project is to open or clone the project in popular IDE's such as *IntelliJ*, *Eclipse* etc and run the `Main.java` file. or you can follow the below steps.
+**The best way to run the project is to open or clone the project in popular IDE's such as *IntelliJ*, *Eclipse* etc and run the `Main.java` file. or you can follow the below steps**
 
 1. **Clone or Download the Project**:
    - Ensure that the project directory structure remains as outlined above.
@@ -92,5 +93,3 @@ Best way to run the project is to open or clone the project in popular IDE's suc
 - **Improved Error Handling**: Enhance error handling to manage malformed CSV files and missing data gracefully.
 - **Additional Tagging Strategies**: Implement more flexible tagging strategies based on different business rules.
 
-## Conclusion
-This program provides a robust and flexible solution for processing flow logs and mapping them to tags based on a lookup table. By adhering to the provided assumptions and guidelines, it ensures accurate and efficient processing of network logs.
