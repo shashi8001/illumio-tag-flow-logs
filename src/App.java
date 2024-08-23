@@ -1,33 +1,32 @@
 package org.shashidharkumar.src;
 
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.util.Properties;
 
 public class App {
     public static void main(String[] args) {
+        Properties props = new Properties();
         try {
-            // Define the file paths
-            String flowLogFile = "C:\\Users\\shash\\Documents\\Learning\\Spring\\Illumio-tag-network-logs\\src\\input\\flow-logs";
-            String lookUpFile = "C:\\Users\\shash\\Documents\\Learning\\Spring\\Illumio-tag-network-logs\\src\\input\\look-up-table";
-            String protocolFile = "C:\\Users\\shash\\Documents\\Learning\\Spring\\Illumio-tag-network-logs\\src\\input\\protocol-numbers-1.csv";
-            String tagCountOutputFile = "C:\\Users\\shash\\Documents\\Learning\\Spring\\Illumio-tag-network-logs\\src\\output\\tagCount";
-            String portProtocolTagCountOutputFile = "C:\\Users\\shash\\Documents\\Learning\\Spring\\Illumio-tag-network-logs\\src\\output\\portProtocolTagCount";
+            // Load the properties file
+            props.load(new FileInputStream("C:\\Users\\shash\\Documents\\Learning\\Spring\\Illumio-tag-network-logs\\src\\config\\config.properties"));
 
-            // Initializing the protocol mapper for mapping protocol names with their numbers
+            // Retrieve file paths from properties
+            String flowLogFile = props.getProperty("flowLogFile");
+            String lookUpFile = props.getProperty("lookUpFile");
+            String protocolFile = props.getProperty("protocolFile");
+            String tagCountOutputFile = props.getProperty("tagCountOutputFile");
+            String portProtocolTagCountOutputFile = props.getProperty("portProtocolTagCountOutputFile");
+
+            // Initialize your objects and process the logs
             ProtocolMapper protocolMapper = new ProtocolMapper(protocolFile);
-
-            // Initializing the flow log processor with the default tagging strategy assuming we might add more strategies in the future
             FlowLogProcessor flowLogProcessor = new FlowLogProcessor(new DefaultTaggingStrategy(lookUpFile, protocolMapper));
-
-            // Processing the flow logs
             flowLogProcessor.processFlowLogs(flowLogFile);
-
-            // Writing the results to the output files
             flowLogProcessor.writeTagCountsToFile(tagCountOutputFile);
             flowLogProcessor.writePortProtocolCountsToFile(portProtocolTagCountOutputFile);
 
-        } catch (Exception e) {
-            System.err.println("An unexpected error occurred while processing: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("Error loading configuration: " + e.getMessage());
         }
     }
 }
