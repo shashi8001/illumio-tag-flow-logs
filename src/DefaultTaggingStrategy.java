@@ -28,6 +28,6 @@ public class DefaultTaggingStrategy implements TaggingStrategy {
         if (protocolName == null) {
             protocolName = "unknown";
         }
-        return lookupTable.getOrDefault(String.valueOf(dstPort)+ "," + protocolName, "Untagged");
+        return lookupTable.getOrDefault(dstPort+ "," + protocolName, "Untagged");
     }
 }
