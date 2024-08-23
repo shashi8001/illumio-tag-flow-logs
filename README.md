@@ -1,5 +1,3 @@
-# illumio-tag-flow-logs
-
 # Flow Log Processor
 
 ## Overview
@@ -14,40 +12,34 @@ This program is designed to parse a flow log file and map each entry to one or m
   - The protocol number mapping file should map protocol names to their respective numbers.
 - **Case Insensitivity**: The program is case-insensitive for protocol names and tags.
 - **File Locations**: The program assumes that the necessary files (flow log, lookup table, protocol mapping) are located in the project directory under the `input/` folder. The output files will be generated in the `output/` folder.
-- **Port and Protocol Combinations**: The program uses both destination port and protocol to determine the tags, as per the lookup table.
 - **Multiple Tags**: The program supports multiple tags for a single port/protocol combination. If multiple tags are found, all tags will be counted.
-- **Simpler Implementation**
+- **Simpler Implementation**: The program is implemented in such a way for a simple understanding and not feature and framework heavy. 
 
 
 ## Instructions to Compile and Run
 
-**The best way to run the project is to open or clone the project in popular IDE's such as *IntelliJ*, *Eclipse* etc and run the `Main.java` file. or you can follow the below steps**
+### The best way to run the project is to open or clone the project in popular IDE's such as *IntelliJ*, *Eclipse* etc and run the `App.java` file.
+
+or you can follow the below steps
 
 1. **Clone or Download the Project**:
    - Ensure that the project directory structure remains as outlined above.
 
 2. **Compile the Program**:
-   - Navigate to the `src/main/java/` directory.
+   - Navigate to the `~/src` directory.
    - Run the following command to compile the Java files:
      ```sh
-     javac Application.java
+     javac App.java
      ```
 
 3. **Run the Program**:
    - After compilation, run the program using the following command:
      ```sh
-     java Application
+     java App
      ```
    - This will generate two output files:
      - `output/tagCount.csv`: Contains the count of matches for each tag.
      - `output/portProtocolTagCount.csv`: Contains the count of matches for each port/protocol combination.
-
-4. **Command-Line Arguments**:
-   - If you wish to use the alternative tagging strategy, run the program with the following command:
-     ```sh
-     java Application alternative
-     ```
-   - This will use the `AlternativeTaggingStrategy`, which only considers the destination port for tagging.
 
 ## Output Files
 
