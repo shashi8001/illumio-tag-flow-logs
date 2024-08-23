@@ -20,6 +20,8 @@ This program is designed to parse a flow log file and map each entry to one or m
 
 ## Instructions to Compile and Run
 
+Best way to run the project is to open or clone the project in popular IDE's such as *IntelliJ*, *Eclipse* etc and run the `Main.java` file. or you can follow the below steps.
+
 1. **Clone or Download the Project**:
    - Ensure that the project directory structure remains as outlined above.
 
