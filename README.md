@@ -1,4 +1,4 @@
-# Tag Flow Logs - Illumio
+# Tag Flow Logs
 
 ## Overview
 This program is designed to parse a flow log file and map each entry to one or more tags based on a lookup table. The program generates two output files: one containing the count of matches for each tag and another containing the count of matches for each port/protocol combination.
