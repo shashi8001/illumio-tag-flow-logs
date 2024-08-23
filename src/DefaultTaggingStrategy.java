@@ -1,6 +1,9 @@
 package org.shashidharkumar.src;
 
-import java.util.*;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DefaultTaggingStrategy implements TaggingStrategy {
     private final Map<String, String> lookupTable;
@@ -9,16 +12,27 @@ public class DefaultTaggingStrategy implements TaggingStrategy {
     public DefaultTaggingStrategy(String lookupFilePath, ProtocolMapper protocolMapper) {
         this.lookupTable = new HashMap<>();
         this.protocolMapper = protocolMapper;
-        loadLookupTable(lookupFilePath);
+        try {
+            loadLookupTable(lookupFilePath);
+        } catch (IOException e) {
+            System.err.println("Error loading lookup table from file: " + lookupFilePath + "\n" + e.getMessage());
+        }
     }
 
-    private void loadLookupTable(String lookupFilePath) {
+    private void loadLookupTable(String lookupFilePath) throws IOException {
         CSVParser csvParser = new CSVParser();
         String delimiter = ",";
-        List<String[]> records = csvParser.parseCsvFile(lookupFilePath,delimiter);
+        List<String[]> records = csvParser.parseCsvFile(lookupFilePath, delimiter);
         for (String[] record : records) {
-            String key = record[0].toLowerCase() + "," + record[1].toLowerCase();
-            lookupTable.put(key, record[2]);
+            try {
+                if (record.length < 3) {
+                    throw new IOException("Malformed lookup table entry: " + String.join(",", record));
+                }
+                String key = record[0].toLowerCase() + "," + record[1].toLowerCase();
+                lookupTable.put(key, record[2]);
+            } catch (Exception e) {
+                System.err.println("Error processing lookup table entry: " + String.join(",", record) + "\n" + e.getMessage());
+            }
         }
     }
 
@@ -26,8 +40,9 @@ public class DefaultTaggingStrategy implements TaggingStrategy {
     public String getTag(int dstPort, String protocolNumber) {
         String protocolName = protocolMapper.getProtocolName(protocolNumber);
         if (protocolName == null) {
+            System.err.println("Warning: Protocol number " + protocolNumber + " is not recognized. Using 'unknown'.");
             protocolName = "unknown";
         }
-        return lookupTable.getOrDefault(dstPort+ "," + protocolName, "Untagged");
+        return lookupTable.getOrDefault(dstPort + "," + protocolName, "Untagged");
     }
 }
