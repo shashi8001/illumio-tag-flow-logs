@@ -1,4 +1,4 @@
-package org.shashidharkumar.src;
+package org.shashidharkumar.src.processor;
 
 import org.shashidharkumar.src.parser.FileParser;
 import org.shashidharkumar.src.strategy.TaggingStrategy;

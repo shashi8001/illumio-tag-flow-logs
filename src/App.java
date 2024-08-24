@@ -3,6 +3,7 @@ package org.shashidharkumar.src;
 import org.shashidharkumar.src.mapper.ProtocolMapper;
 import org.shashidharkumar.src.parser.CSVParser;
 import org.shashidharkumar.src.parser.FlowLogParser;
+import org.shashidharkumar.src.processor.FlowLogProcessor;
 import org.shashidharkumar.src.strategy.DefaultTaggingStrategy;
 
 import java.io.FileInputStream;
