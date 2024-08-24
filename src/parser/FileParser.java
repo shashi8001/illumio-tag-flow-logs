@@ -1,4 +1,4 @@
-package org.shashidharkumar.src;
+package org.shashidharkumar.src.parser;
 
 import java.io.IOException;
 import java.util.List;

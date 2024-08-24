@@ -1,4 +1,6 @@
-package org.shashidharkumar.src;
+package org.shashidharkumar.src.mapper;
+
+import org.shashidharkumar.src.parser.FileParser;
 
 import java.io.IOException;
 import java.util.HashMap;

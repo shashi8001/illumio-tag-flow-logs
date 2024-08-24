@@ -1,5 +1,8 @@
 package org.shashidharkumar.src;
 
+import org.shashidharkumar.src.parser.FileParser;
+import org.shashidharkumar.src.strategy.TaggingStrategy;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;

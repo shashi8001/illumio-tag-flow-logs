@@ -1,4 +1,4 @@
-package org.shashidharkumar.src;
+package org.shashidharkumar.src.parser;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
