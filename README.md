@@ -71,7 +71,6 @@ or you can follow the below steps
 - **Case Sensitivity**: Verified that the program correctly handles protocol names and tags in a case-insensitive manner.
 - **Tagging**: Tested with various combinations of flow logs and lookup tables to ensure correct tagging.
 - **Edge Cases**: Handled edge cases such as empty files, missing fields, and unsupported protocols.
-- **Performance**: Ensured the program performs efficiently with files up to 10 MB in size and lookup tables with up to 10,000 entries.
 
 ## Known Limitations
 
