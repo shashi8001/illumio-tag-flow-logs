@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FlowLogParser implements FileParser {
+public class FlowLogParser implements Parser {
 
     @Override
     public List<String[]> parseFile(String filePath) {

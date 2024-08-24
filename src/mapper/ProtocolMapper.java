@@ -1,6 +1,6 @@
 package org.shashidharkumar.src.mapper;
 
-import org.shashidharkumar.src.parser.FileParser;
+import org.shashidharkumar.src.parser.Parser;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -9,10 +9,10 @@ import java.util.Map;
 
 public class ProtocolMapper {
     private final Map<String, String> protocolMap = new HashMap<>();
-    private final FileParser fileParser;
+    private final Parser parser;
 
-    public ProtocolMapper(FileParser fileParser, String protocolFilePath) {
-        this.fileParser = fileParser;
+    public ProtocolMapper(Parser parser, String protocolFilePath) {
+        this.parser = parser;
         try {
             loadProtocolMap(protocolFilePath);
         } catch (IOException e) {
@@ -22,7 +22,7 @@ public class ProtocolMapper {
     }
 
     private void loadProtocolMap(String protocolFilePath) throws IOException {
-        List<String[]> records = fileParser.parseFile(protocolFilePath);
+        List<String[]> records = parser.parseFile(protocolFilePath);
         for (String[] record : records) {
             if (record.length < 2) {
                 System.err.println("Malformed protocol mapping entry: " + String.join(",", record));

@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CSVParser implements FileParser {
+public class CSVParser implements Parser {
 
     @Override
     public List<String[]> parseFile(String filePath){
@@ -18,7 +18,6 @@ public class CSVParser implements FileParser {
                     if (line.trim().isEmpty()) {
                         continue; // Skip empty lines
                     }
-                    // Assuming the default CSV structure is comma-separated
                     String[] values = line.split(","); // Use comma as default separator for CSV
                     records.add(values);
                 } catch (Exception e) {

@@ -1,7 +1,7 @@
 package org.shashidharkumar.src.strategy;
 
 import org.shashidharkumar.src.mapper.ProtocolMapper;
-import org.shashidharkumar.src.parser.FileParser;
+import org.shashidharkumar.src.parser.Parser;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -11,12 +11,12 @@ import java.util.Map;
 public class DefaultTaggingStrategy implements TaggingStrategy {
     private final Map<String, String> lookupTable;
     private final ProtocolMapper protocolMapper;
-    private final FileParser fileParser;
+    private final Parser parser;
 
-    public DefaultTaggingStrategy(FileParser fileParser, ProtocolMapper protocolMapper, String lookupFilePath) {
+    public DefaultTaggingStrategy(Parser parser, ProtocolMapper protocolMapper, String lookupFilePath) {
         this.lookupTable = new HashMap<>();
         this.protocolMapper = protocolMapper;
-        this.fileParser = fileParser;
+        this.parser = parser;
         try {
             loadLookupTable(lookupFilePath);
         } catch (IOException e) {
@@ -25,7 +25,7 @@ public class DefaultTaggingStrategy implements TaggingStrategy {
     }
 
     private void loadLookupTable(String lookupFilePath) throws IOException {
-        List<String[]> records = fileParser.parseFile(lookupFilePath);
+        List<String[]> records = parser.parseFile(lookupFilePath);
         for (String[] record : records) {
             try {
                 if (record.length < 3) {

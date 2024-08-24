@@ -7,7 +7,7 @@ This program is designed to parse a flow log file and map each entry to one or m
 - **Default Log Format**: The program only supports the default log format as provided in the problem statement. Custom log formats are not supported.
 - **Log Version**: The program only supports version 2 of the log format.
 - **CSV File Format**:
-  - The flow log, lookup table, and protocol number mapping files must all be in CSV format.
+  - The lookup table, and protocol number mapping files must be in CSV format.
   - The lookup table is expected to have three columns: `dstport`, `protocol`, and `tag`.
   - The protocol number mapping file should map protocol names to their respective numbers.
 - **Case Insensitivity**: The program is case-insensitive for protocol names and tags.
@@ -18,7 +18,7 @@ This program is designed to parse a flow log file and map each entry to one or m
 
 ## Instructions to Compile and Run
 
-### The best way to run the project is to open or clone the project in popular IDE's such as *IntelliJ*, *Eclipse* etc and run the `App.java` file.
+### The best way to run the project is to open or clone the project in popular IDE's such as *IntelliJ*, *Eclipse* etc. and run the `App.java` file.
 
 or you can follow the below steps
 
@@ -51,7 +51,7 @@ or you can follow the below steps
     sv_P2,1
     sv_P1,2
     email,3
-    Untagged,9
+    Untagged,8
     ```
 
 - **Port/Protocol Combination Count Output (portProtocolTagCount.csv)**:
@@ -76,7 +76,7 @@ or you can follow the below steps
 ## Known Limitations
 
 - **Custom Log Formats**: The program does not support custom log formats or versions other than 2.
-- **Error Handling**: The program expects correctly formatted CSV files. Malformed files may cause errors.
+- **Error Handling**: The program expects correctly formatted CSV files. Malformed files may cause exceptions.
 - **Unsupported Protocols**: If a protocol number is not found in the protocol mapping file, the program will use "unknown" as the protocol name.
 
 ## Future Enhancements

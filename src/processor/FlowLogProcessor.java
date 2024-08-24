@@ -1,6 +1,6 @@
 package org.shashidharkumar.src.processor;
 
-import org.shashidharkumar.src.parser.FileParser;
+import org.shashidharkumar.src.parser.Parser;
 import org.shashidharkumar.src.strategy.TaggingStrategy;
 
 import java.io.BufferedWriter;
@@ -19,7 +19,7 @@ public class FlowLogProcessor {
         this.taggingStrategy = taggingStrategy;
     }
 
-    public void processFlowLogs(String flowLogFile, FileParser flowLogParser) throws IOException {
+    public void processFlowLogs(String flowLogFile, Parser flowLogParser) throws IOException {
         // Use the provided FlowLogParser to parse the flow log file
         List<String[]> flowLogs = flowLogParser.parseFile(flowLogFile);
 
