@@ -20,7 +20,7 @@ public class FlowLogProcessor {
     }
 
     public void processFlowLogs(String flowLogFile, Parser flowLogParser) throws IOException {
-        // Use the provided FlowLogParser to parse the flow log file
+        // Using the FlowLogParser to parse the flow log file
         List<String[]> flowLogs = flowLogParser.parseFile(flowLogFile);
 
         for (String[] log : flowLogs) {

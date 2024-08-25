@@ -17,7 +17,7 @@ public class FlowLogParser implements Parser {
                 if (line.trim().isEmpty()) {
                     continue; // Skip empty lines
                 }
-                // Assume flow log entries are space-separated
+                // Assuming flow log entries are space-separated
                 String[] values = line.split("\\s+");
                 records.add(values);
             }
