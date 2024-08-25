@@ -18,7 +18,8 @@ public class CSVParser implements Parser {
                     if (line.trim().isEmpty()) {
                         continue; // Skip empty lines
                     }
-                    String[] values = line.split(","); // Use comma as default separator for CSV
+                    // Use comma as default separator for CSV
+                    String[] values = line.split(",");
                     records.add(values);
                 } catch (Exception e) {
                     System.err.println("Error processing line: " + line + "\n" + e.getMessage());
